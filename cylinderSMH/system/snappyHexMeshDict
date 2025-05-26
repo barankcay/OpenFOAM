@@ -31,7 +31,22 @@ geometry
     cylinder.stl
     {
         type triSurfaceMesh;
-        name cylinder;
+        name cylinder; // Name of the surface
+        regions
+        {
+            inlet             // Named region in the STL file
+            {
+                name inlet; // User-defined patch name
+            }                       // otherwise given sphere.stl_secondSolid
+            outlet            // Named region in the STL file
+            {
+                name outlet; // User-defined patch name
+            }
+            wall
+            {
+                name wall; // User-defined patch name
+            }
+        }
     }
 
     refinementBox //local refinement için oluşturulabilir
@@ -116,13 +131,7 @@ castellatedMeshControls
             // Surface-wise min and max refinement level
             level (5 6);
 
-            // Optional specification of patch type (default is wall). No
-            // constraint types (cyclic, symmetry) etc. are allowed.
-            patchInfo
-            {
-                type wall;
-                inGroups (cylinderGroup);
-            }
+
         }
     }
 
@@ -161,7 +170,7 @@ castellatedMeshControls
     // section reachable from the locationInMesh is kept.
     // NOTE: This point should never be on a face, always inside a cell, even
     // after refinement.
-    locationInMesh (3.0001 3.0001 0.43);
+    locationInMesh (-0.15625 0 4.0);
 
 
     // Whether any faceZones (as specified in the refinementSurfaces)
