@@ -130,6 +130,33 @@ castellatedMeshControls
         {
             // Surface-wise min and max refinement level
             level (5 6);
+            regions
+            {
+                inlet
+                {
+                    level (4 5); // Override for inlet region
+                    patchInfo
+                    {
+                        type patch; // Patch type for inlet
+                    }
+                }
+                outlet
+                {
+                    level (4 5); // Override for outlet region
+                    patchInfo
+                    {
+                        type patch; // Patch type for outlet
+                    }
+                }
+                wall
+                {
+                    level (4 5); // Override for wall region
+                    patchInfo
+                    {
+                        type wall; // Patch type for wall
+                    }
+                }
+            }
 
 
         }
@@ -229,10 +256,11 @@ addLayersControls
     // Per final patch (so not geometry!) the layer information
     layers
     {
-        "(lowerWall|cylinder).*"
+        wall
         {
-            nSurfaceLayers 5;
+            nSurfaceLayers 5; // Number of layers to add
         }
+
     }
 
     // Expansion factor for layer mesh
